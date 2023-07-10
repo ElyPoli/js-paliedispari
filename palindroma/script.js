@@ -5,46 +5,61 @@ Palidroma:
 */
 
 // Dichiaro variabili
-const userWordString = prompt("Inserisci una parola");
-const userWordArray = userWordString.split(""); // Trasformo la stringa in un array dividendo ogni lettera
-let palindromaQuestion;
+const userWordStringElement = document.querySelector(".user-word-string");
+const btnStart = document.getElementById("btn-start");
+const btnRetry = document.getElementById("btn-retry");
 
-console.log("La stringa inserita dall'utente: " + userWordString);
-console.log("Trasformato in un array: " + userWordArray);
+// Pulsante start
+btnStart.addEventListener("click", function () {
 
-// Invoco la funzione per stabili se la parola inserita è palindroma
-palindromaQuestion = palindroma(userWordArray);
+    const questionResult = document.getElementById("question-result");
+    const userWordString = userWordStringElement.value;
+    let palindromaQuestion;
 
-console.log("La parola è palindroma? " + palindromaQuestion);
+    // Controllo input utente
+    if (isNaN(userWordString) != true) {
+        alert("Si è verificato un errore");
+        location.reload();
+    }
+
+    const userWordArray = userWordString.split(""); // Trasformo la stringa in un array dividendo ogni lettera
+
+    // Invoco la funzione per stabilire se la parola inserita è palindroma
+    palindromaQuestion = palindroma(userWordArray);
+
+    questionResult.innerHTML =
+        `
+        <p>Hai inserito la parola <span class="text-uppercase fw-bold">${userWordString}</span> che <span class="text-uppercase fw-bold">${palindromaQuestion}</span></p>
+    `;
+})
 
 // Funzione che stabilisce se una parola è palindroma
 function palindroma(arrayWord) {
 
-    let palindromaWord = true;
+    let palindromaWord = "è palindroma";
     const arrayBackwards = [];
     let z = 0;
     let arrayWordLength = arrayWord.length - 1; // Per farlo iniziare a contare da 0
 
     // Scorro sull'array al contrario e lo copio in un altro
     for (let i = arrayWordLength; i >= 0; i--) {
-
         arrayBackwards[z] = arrayWord[i];
-
         z++;
     }
-
-    console.log("Questo è l'array originale: " + arrayWord);
-    console.log("Questo è l'array al contrario: " + arrayBackwards);
 
     // Scorro su entrambi gli array per confrontarli - fino a che non trovo una lettera diversa o finisce l'array
     let i = 0;
     do {
         if (arrayWord[i] != arrayBackwards[i]) {
-            palindromaWord = false;
-        } 
-
+            palindromaWord = "non è palindroma";
+        }
         i++;
-    } while (palindromaWord === true && i < arrayWordLength);
+    } while (palindromaWord === "è palindroma" && i < arrayWordLength);
 
     return palindromaWord;
 }
+
+// Pulsante retry
+btnRetry.addEventListener("click", function () {
+    location.reload();
+})
