@@ -15,6 +15,30 @@
 </head>
 
 <body>
+    <main class="bg-primary vh-100 d-flex align-items-center justify-content-center">
+        <div class="container text-center text-white">
+            <h1 class="text-uppercase fw-bold m-0 pb-4">Pari o dispari?</h1>
+            <!-- Form in cui seleziona pari o dispari e inserisce un numero -->
+            <div class="mb-3 d-flex align-items-center justify-content-center">
+                <div class="me-2">
+                    <label class="form-label fs-5">Seleziona pari o dispari:</label>
+                    <select class="form-select choice">
+                        <option value="pari">Pari</option>
+                        <option value="dispari">Dispari</option>
+                    </select>
+                </div>
+                <div class="ms-2">
+                    <label for="text1" class="form-label fs-5">Inserisci un numero da 1 a 5:</label>
+                    <input type="text" class="form-control number-user" id="text1">
+                </div>
+            </div>
+            <button class="btn btn-primary fs-5 mt-2 me-1" id="btn-start">Start</button>
+            <button class="btn btn-primary fs-5 mt-2 ms-1" id="btn-retry">Retry</button>
+            <!-- Risultato -->
+            <div class="mt-4 fs-5" id="question-result">
+            </div>
+        </div>
+    </main>
 
     <!-- Custom Js -->
     <script src="script.js"></script>
