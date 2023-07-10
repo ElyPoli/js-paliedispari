@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esercizio 2o: Palindroma</title>
+    <title>Esercizio 28: Palindroma</title>
 
     <!-- Bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,6 +15,21 @@
 </head>
 
 <body>
+    <main class="bg-primary vh-100 d-flex align-items-center justify-content-center">
+        <div class="container text-center text-white">
+            <h1 class="text-uppercase fw-bold m-0 pb-4">La parola è palindroma?</h1>
+            <!-- Form in cui inserire la parola -->
+            <div class="mb-3">
+                <label for="text1" class="form-label fs-5">Inserisci una parola:</label>
+                <input type="text" class="form-control user-word-string" id="text1">
+            </div>
+            <button class="btn btn-primary fs-5 mt-2 me-1" id="btn-start">Start</button>
+            <button class="btn btn-primary fs-5 mt-2 ms-1" id="btn-retry">Retry</button>
+            <!-- Risultato -->
+            <div class="mt-4 fs-5" id="question-result">
+            </div>
+        </div>
+    </main>
 
     <!-- Custom Js -->
     <script src="script.js"></script>
