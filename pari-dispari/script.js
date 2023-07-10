@@ -8,48 +8,56 @@ Pari e Dispari:
 */
 
 // Dichiaro variabili
-const choice = prompt("Scegli: pari o dispari?");
-const numberUser = parseInt(prompt("Inserisci un numero da 1 a 5:"));
-let numberPc = randomGenerator (5, 1); // Invoco la funzione che genera un numero casuale
-let sum, result, winner;
+const choiceElement = document.querySelector(".choice");
+const numberUserElement = document.querySelector(".number-user");
+const btnStart = document.getElementById("btn-start");
+const btnRetry = document.getElementById("btn-retry");
 
-console.log("Scelta utente: " + choice);
-console.log("Numero utente: " + numberUser);
-console.log("Numero pc: " + numberPc);
+// Pulsante start
+btnStart.addEventListener("click", function () {
+    
+    const questionResult = document.getElementById("question-result");
+    const choice = choiceElement.value;
+    const numberUser = parseInt(numberUserElement.value);
+    let numberPc = randomGenerator(5, 1); // Invoco la funzione che genera un numero casuale
+    let sum, result, winner;
 
-// Controllo input utente
-if (isNaN(numberUser) || numberUser < 1 || numberUser > 5) {
-    alert("Si è verificato un errore");
-    location.reload();
-}
+    // Controllo input utente
+    if (isNaN(numberUser) || numberUser < 1 || numberUser > 5) {
+        alert("Si è verificato un errore");
+        location.reload();
+    }
 
-// Somma dei due numeri
-sum = numberUser + numberPc;
+    // Somma dei due numeri
+    sum = numberUser + numberPc;
+    result = evenOdd(sum); // Invoco la funzione che stabilisce se un numero è pari o dispari
 
-console.log("Somma dei due numeri " + sum);
+    // Stabilisco chi ha vinto
+    if (result === choice) {
+        winner = "utente";
+    } else {
+        winner = "computer";
+    }
 
-result = evenOdd(sum); // Invoco la funzione che stabilisce se un numero è pari o dispari
-
-console.log("Il numero è: " + result);
-
-// Stabilisco chi ha vinto
-if (result === choice) {
-    winner = "utente";
-} else {
-    winner = "computer";
-}
-
-console.log("Il vincitore è: " + winner);
+    questionResult.innerHTML = 
+    `
+        <p>Hai selezionato <span class="text-uppercase fw-bold">${choice}</span></p>
+        <p>Hai inserito il numero <span class="text-uppercase fw-bold">${numberUser}</span></p>
+        <p>Il computer ha estratto il numero <span class="text-uppercase fw-bold">${numberPc}</span></p>
+        <p>La somma dei due numeri da <span class="text-uppercase fw-bold">${sum}</span> un numero <span class="text-uppercase fw-bold">${result}</span></p>
+        <p class="fs-4">Il vincitore è: <span class="text-uppercase fw-bold">${winner}</span></p>
+    `;
+})
 
 // Funzione che genera numeri random da 1 a 5
-function randomGenerator (max, min) {
+function randomGenerator(max, min) {
     randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
 
     return randomNumber;
 }
 
 // Funzione che stabilisce se un numero è pari o dispari
-function evenOdd (sumNumber) {
+function evenOdd(sumNumber) {
     let numberEvenOdd = "dispari";
 
     if (sumNumber % 2 === 0) {
@@ -58,3 +66,8 @@ function evenOdd (sumNumber) {
 
     return numberEvenOdd;
 }
+
+// Pulsante retry
+btnRetry.addEventListener("click", function () {
+    location.reload();
+})
